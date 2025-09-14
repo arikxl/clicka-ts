@@ -1,27 +1,24 @@
-import React, { useState } from 'react'
 import { Link } from 'react-router'
+import { useState } from 'react'
+
 import Button from './btns/Button';
 import HamburgerBtn from './btns/HamburgerBtn';
-// import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 
 
-type Props = {}
 
-const Header = (props: Props) => {
+const Header = () => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    const user = '';
-    const name = '';
-    const picture = '';
-    // const { user, loginWithGoogle, logOut } = useAuth();
+    const { user, loginWithGoogle, logOut } = useAuth();
     // console.log(user?.user_metadata)
 
-    // const name = user?.user_metadata?.name;
-    // const picture = user?.user_metadata?.picture;
+    const name = user?.user_metadata?.name;
+    const picture = user?.user_metadata?.picture;
 
     const handleLogOut = () => {
-        // if (window.confirm('Do you want to logOut?')) logOut();
+        if (window.confirm('Do you want to logOut?')) logOut();
     }
 
 
@@ -60,11 +57,10 @@ const Header = (props: Props) => {
                                     </div>
                                 )
                                 : (
-                                    <Button onClick={(console.log('s'))}>
+                                    <Button onClick={loginWithGoogle}>
                                         Login
                                     </Button>
                                 )
-
                         }
                     </div>
 
@@ -81,19 +77,19 @@ const Header = (props: Props) => {
                 (
                     <div className='md:hidden bg-[rgba(100, 100, 100, 0.9)]'>
                         <nav className='p-2.5'>
-                        <Link onClick={() => setIsMenuOpen(false)} to='/'
+                            <Link onClick={() => setIsMenuOpen(false)} to='/'
                                 className='block p-3 rounded-[10px] text-base font-bold text-gray-300 hover:text-white hover:bg-gray-600' >
                                 Home
                             </Link>
-                        <Link onClick={() => setIsMenuOpen(false)} to='/create'
+                            <Link onClick={() => setIsMenuOpen(false)} to='/create'
                                 className='block p-3 rounded-[10px] text-base font-bold text-gray-300 hover:text-white hover:bg-gray-600' >
                                 Post
                             </Link>
-                        <Link onClick={() => setIsMenuOpen(false)} to='/group/create'
+                            <Link onClick={() => setIsMenuOpen(false)} to='/group/create'
                                 className='block p-3 rounded-[10px] text-base font-bold text-gray-300 hover:text-white hover:bg-gray-600' >
                                 Build
                             </Link>
-                        <Link onClick={() => setIsMenuOpen(false)} to='/groups'
+                            <Link onClick={() => setIsMenuOpen(false)} to='/groups'
                                 className='block p-3 rounded-[10px] text-base font-bold text-gray-300 hover:text-white hover:bg-gray-600' >
                                 Groups
                             </Link>

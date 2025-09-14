@@ -1,12 +1,10 @@
-import { useState } from 'react'
+import { Route, Routes } from 'react-router'
 
 import './App.css'
-import { Route, Routes } from 'react-router'
 import Home from './pages/Home'
 import Header from './components/Header'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <div className='min-h-screen bg-black text-gray-100 pt-20 transition-opacity ease-in-out duration-700'>
