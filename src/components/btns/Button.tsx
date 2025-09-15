@@ -1,13 +1,16 @@
 import React from 'react';
 
+type ButtonType = 'button' | 'submit' | 'reset';
+
 type Props = {
     children: React.ReactNode;
-    onClick: () => void;
+    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    type?: ButtonType;
 };
 
-const Button = ({ children, onClick }: Props) => {
+const Button = ({ children, onClick, type }: Props) => {
     return (
-        <button className='cursor-pointer bg-[hotpink] text-white border-none text-xl py-[5px] px-5 rounded-[10px]'
+        <button type={type}  className=' cursor-pointer bg-[hotpink] text-white border-none text-xl py-[5px] px-5 rounded-[10px]'
             onClick={onClick}>
             {children}
         </button>
