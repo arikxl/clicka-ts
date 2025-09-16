@@ -23,7 +23,7 @@ const createPost = async  (post: PostInput, imgFile:File) => {
 
     const { data:publicUrlData } = supabase.storage.from('post-images').getPublicUrl(filePath);
     
-    const { data, error } = await supabase.from('posts').insert({...post, img_url:publicUrlData});
+    const { data, error } = await supabase.from('posts').insert({...post, img_url:publicUrlData.publicUrl});
     
     
     if (error) throw new Error(error.message)
@@ -79,6 +79,12 @@ const CreatePostForm = () => {
                 />
                 <UploadImgBtn onClick={handleUploadButtonClick} />
             </div>
+
+            {/* {
+                selectedFile && (
+                    <img src={ } />
+                )
+            } */}
            
             <div className=''>
 
