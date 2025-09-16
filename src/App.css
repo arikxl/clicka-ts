@@ -2,10 +2,14 @@
 
 
 
-body{
-    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+body {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
+.upload-btn {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+}
 
 .logo {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -14,7 +18,7 @@ body{
   color: white;
 }
 
-.logo span{
+.logo span {
   color: hotpink;
 }
 

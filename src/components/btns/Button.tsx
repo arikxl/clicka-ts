@@ -10,7 +10,7 @@ type Props = {
 
 const Button = ({ children, onClick, type }: Props) => {
     return (
-        <button type={type}  className=' cursor-pointer bg-[hotpink] text-white border-none text-xl py-[5px] px-5 rounded-[10px]'
+        <button type={type} className=' w-full flex items-center justify-center  cursor-pointer bg-[hotpink] text-white border-none text-xl py-2 px-5 rounded-[10px]'
             onClick={onClick}>
             {children}
         </button>
