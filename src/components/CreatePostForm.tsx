@@ -5,10 +5,12 @@ import { useMutation } from '@tanstack/react-query';
 import Button from './btns/Button'
 import { supabase } from '../supabase-client';
 import UploadImgBtn from './btns/UploadImgBtn';
+import { useAuth } from '../context/AuthContext';
 
 interface PostInput{
     title: string;
-    content: string
+    content: string;
+    user_avatar_url: string | null;
 }
 
 const createPost = async  (post: PostInput, imgFile:File) => {
@@ -41,6 +43,8 @@ const CreatePostForm = () => {
     const [content, setContent] = useState<string>('');
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
+    const { user } = useAuth();
+
     const { mutate, isPending, isError} = useMutation({
         mutationFn: (data:{post:PostInput, imgFile: File}) => {
         return createPost(data.post, data.imgFile)
@@ -49,7 +53,7 @@ const CreatePostForm = () => {
     const handleSubmitForm = (e: React.FormEvent) => {
         e.preventDefault()
         if(!selectedFile) return
-        mutate({ post: { title, content }, imgFile: selectedFile })
+        mutate({ post: { title, content , user_avatar_url:user?.user_metadata.avatar_url  || null}, imgFile: selectedFile })
     }
 
 

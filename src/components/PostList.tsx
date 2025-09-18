@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
-import { supabase } from '../supabase-client'
+
+
 import PostPreview from './PostPreview';
+import { supabase } from '../supabase-client'
 
 export  interface Post {
     id: number;
@@ -8,7 +10,7 @@ export  interface Post {
     content: string;
     img_url: string;
     created_at: string;
-    avatar_url: string;
+    user_avatar_url?: string;
     like_count: number;
     comment_count:number
 }

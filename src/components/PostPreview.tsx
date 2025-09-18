@@ -1,5 +1,7 @@
 import { Link } from 'react-router'
+
 import type { Post } from './PostList'
+import { getColor } from '../utils/utils'
 
 
 interface Props {
@@ -8,39 +10,43 @@ interface Props {
 
 
 const PostPreview = ({ post }: Props) => {
+
+
     return (
         <figure className='relative group'>
             <div className="absolute -inset-1 rounded-[20px] bg-gradient-to-r from-pink-600 to-purple-600 blur-sm opacity-0 group-hover:opacity-50 transition duration-300 pointer-events-none"></div>
             <Link to={`/post/${post.id}`} className="block relative z-10">
-                <div className="w-80 h-70 bg-[rgb(24,27,32)] border border-[rgb(84,90,106)] rounded-[20px] text-white flex flex-col p-5 overflow-hidden transition-colors duration-300 group-hover:bg-gray-800">
+                <div style={{ backgroundImage: `URL(${post.img_url})`, backgroundPosition: 'center', backgroundSize: 'cover' }}
+                    className="background-cover w-80 h-70 bg-[rgb(24,27,32)] border border-[rgb(84,90,106)] rounded-[20px] text-white flex flex-col justify-between overflow-hidden transition-colors duration-300 group-hover:bg-gray-800">
                     {/* Header: Avatar and Title */}
-                    <div className="flex items-center space-x-2">
-                        {post.avatar_url ? (
+                    <div className="flex items-center space-x-2  p-2 ">
+                        {post.user_avatar_url ? (
                             <img
-                                src={post.avatar_url}
+                                src={post?.user_avatar_url}
                                 alt="User Avatar"
                                 className="w-[35px] h-[35px] rounded-full object-cover"
                             />
                         ) : (
-                            <div className="w-[35px] h-[35px] rounded-full bg-gradient-to-tl from-[#8A2BE2] to-[#491F70]" />
+                                <div className={`w-[35px] h-[35px] rounded-full`}
+                                    style={getColor()} />
                         )}
-                        <div className="flex flex-col flex-1">
-                            <div className="text-[20px] leading-[22px] font-semibold mt-2">
+                        <div className="flex flex-col flex-1 ">
+                            <div className="text-[20px] leading-[22px] font-semibold">
                                 {post.title}
                             </div>
                         </div>
                     </div>
 
 
-                    <div className="mt-2 flex-1">
+                    {/* <div className="mt-2 flex-1">
                         <img
                             src={post.img_url}
                             alt={post.title}
                             className="max-w-full w-fit rounded-[20px] object-cover  max-h-[150px] mx-auto"
                         />
-                    </div>
+                    </div> */}
 
-                    <div className="flex justify-around items-center">
+                    <div className="flex justify-around items-center bg-black/50 w-full">
                         <span className="cursor-pointer h-10 w-[50px] px-1 flex items-center justify-center font-extrabold rounded-lg">
                             ❤️ <span className="ml-2">{post.like_count ?? 0}</span>
                         </span>

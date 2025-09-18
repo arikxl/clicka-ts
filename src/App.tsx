@@ -4,6 +4,7 @@ import './App.css'
 import Home from './pages/Home'
 import Header from './components/Header'
 import CreatePostPage from './pages/CreatePostPage'
+import PostPage from './pages/PostPage'
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/create' element={<CreatePostPage />} />
+          <Route path='/post/:id' element={<PostPage />} />
         </Routes>
       </main>
     </div>

@@ -15,7 +15,7 @@ const Header = () => {
     // console.log(user?.user_metadata)
 
     const name = user?.user_metadata?.name;
-    const picture = user?.user_metadata?.picture;
+    const picture = user?.user_metadata?.avatar_url;
 
     const handleLogOut = () => {
         if (window.confirm('Do you want to logOut?')) logOut();
@@ -50,10 +50,16 @@ const Header = () => {
                                         <p>
                                             {name}
                                         </p>
-                                        <img alt={name} src={picture}
-                                            className='rounded-full w-10 cursor-pointer'
-                                            onClick={handleLogOut}
-                                        />
+
+                                        {picture[0]==='h' ? (
+                                            <img alt={name} src={picture}
+                                                className='rounded-full w-10 cursor-pointer'
+                                                onClick={handleLogOut}
+                                            />
+                                        ) : (
+                                            <div className="w-[35px] h-[35px] rounded-full bg-gradient-to-br from-purple-500 to-pink-500" />
+                                        )}
+                                 
                                     </div>
                                 )
                                 : (

@@ -3,6 +3,8 @@ import Title from "../components/Title";
 
 type Props = {}
 
+
+
 const Home = (props: Props) => {
   return (
     <div className="pt-10">

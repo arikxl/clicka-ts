@@ -45,7 +45,7 @@ const UploadImgBtn = ({ onClick }: { onClick: () => void }) => {
 
             <style>{styles}</style>
 
-            <button className='upload-btn !bg-purple-800' onClick={onClick} type="button">
+            <button className='upload-btn !bg-purple-500' onClick={onClick} type="button">
                 <svg
                     aria-hidden="true"
                     stroke="currentColor"
