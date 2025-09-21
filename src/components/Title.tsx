@@ -1,6 +1,6 @@
 
 type Props = {
-    children: string
+    children: string | undefined
 }
 
 const Title = (props: Props) => {
