@@ -1,6 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
-
 import { useAuth } from "../../context/AuthContext";
 import { supabase } from "../../supabase-client"
 
@@ -61,7 +60,10 @@ const LikeBtn = ({ postId }: Props) => {
     const { mutate } = useMutation({
         mutationFn: (likes: number) => {
 
-            if (!user) throw new Error('Login to Like!')
+            if (!user) {
+                window.alert('Login to Like')
+                throw new Error('Login to Like!')
+            }
             return likePost(likes, postId, user.id)
 
         },
@@ -82,11 +84,11 @@ const LikeBtn = ({ postId }: Props) => {
 
 
     return (
-        <div>
+        <div className="mb-6">
             <button onClick={() => mutate(1)}
                 className={`px-3 py-1 cursor-pointer rounded transition-colors duration-150 ${userVote === 1 ? 'bg-[hotPink] text-white' : 'bg-gray-200 text-black'}`}
             >
-                {userVote===1 ? '🤍' : '❤️'} {likesCount}
+                {userVote === 1 ? '🤍' : '❤️'} {likesCount}
             </button>
             &nbsp;
             <button onClick={() => mutate(-1)}

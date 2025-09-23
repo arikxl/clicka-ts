@@ -3,8 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 
 import Title from "./Title";
 import LikeBtn from "./btns/LikeBtn";
-import type { Post } from "./PostList";
+import CommentSection from "./CommentSection";
 import { supabase } from "../supabase-client";
+import type { Post } from "./PostList";
 
 
 interface Props {
@@ -35,7 +36,7 @@ const PostDetails = ({ postId }: Props) => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="space-y-6 flex">
+    <div className="space-y-6 flex gap-6">
 
       <div className="flex-1">
 
@@ -43,18 +44,19 @@ const PostDetails = ({ postId }: Props) => {
           {data?.title}
         </Title>
 
-        <p className="text-gray-400">
+        <p className="text-gray-400 mb-10">
           {data?.content}
         </p>
 
         <LikeBtn postId={postId} />
+        <CommentSection postId={postId} />
       </div>
 
-      <div className="flex-1">
-        <img src={data?.img_url} alt={data?.title} className="mt-4 rounded object-cover w-full h-82" />
+      <div className="flex-1 ">
         <p className="text-gray-500 text-sm mt-10">
           Posted on: {new Date(data!.created_at).toLocaleDateString()}
         </p>
+        <img src={data?.img_url} alt={data?.title} className=" mt-4 rounded object-cover w-full" />
       </div>
     </div>
   )
