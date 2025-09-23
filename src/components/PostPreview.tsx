@@ -1,7 +1,7 @@
 import { Link } from 'react-router'
 
-import type { Post } from './PostList'
 import { getColor } from '../utils/utils'
+import type { Post } from './PostList'
 
 
 interface Props {

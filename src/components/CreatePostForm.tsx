@@ -3,9 +3,10 @@ import { useMutation } from '@tanstack/react-query';
 
 
 import Button from './btns/Button'
-import { supabase } from '../supabase-client';
 import UploadImgBtn from './btns/UploadImgBtn';
 import { useAuth } from '../context/AuthContext';
+import { supabase } from '../supabase-client';
+import { useNavigate } from 'react-router';
 
 interface PostInput{
     title: string;
@@ -26,14 +27,16 @@ const createPost = async  (post: PostInput, imgFile:File) => {
     const { data:publicUrlData } = supabase.storage.from('post-images').getPublicUrl(filePath);
     
     const { data, error } = await supabase.from('posts').insert({...post, img_url:publicUrlData.publicUrl});
-    
+
     
     if (error) throw new Error(error.message)
-    
+
     return data
 }
 
 const CreatePostForm = () => {
+    const navigate = useNavigate();
+
 
     const fileInputRef = useRef<HTMLInputElement>(null);
     const titleInputRef = useRef<HTMLInputElement>(null);
@@ -47,13 +50,16 @@ const CreatePostForm = () => {
 
     const { mutate, isPending, isError} = useMutation({
         mutationFn: (data:{post:PostInput, imgFile: File}) => {
-        return createPost(data.post, data.imgFile)
-    } })
-
-    const handleSubmitForm = (e: React.FormEvent) => {
-        e.preventDefault()
-        if(!selectedFile) return
-        mutate({ post: { title, content , user_avatar_url:user?.user_metadata.avatar_url  || null}, imgFile: selectedFile })
+            return createPost(data.post, data.imgFile)
+        } })
+        
+        const handleSubmitForm = (e: React.FormEvent) => {
+            e.preventDefault()
+            if(!selectedFile) return
+            mutate({ post: { title, content, user_avatar_url: user?.user_metadata.avatar_url || null }, imgFile: selectedFile })
+            
+            // navigate('/')
+    
     }
 
 

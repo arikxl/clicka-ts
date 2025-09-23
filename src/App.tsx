@@ -3,8 +3,10 @@ import { Route, Routes } from 'react-router'
 import './App.css'
 import Home from './pages/Home'
 import Header from './components/Header'
-import CreatePostPage from './pages/CreatePostPage'
 import PostPage from './pages/PostPage'
+import GroupsPage from './pages/GroupsPage'
+import CreatePostPage from './pages/CreatePostPage'
+import CreateGroupPage from './pages/CreateGroupPage'
 
 function App() {
 
@@ -17,6 +19,9 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/create' element={<CreatePostPage />} />
           <Route path='/post/:id' element={<PostPage />} />
+          <Route path='group/:id' element={<GroupsPage />} />
+          <Route path='group/build/' element={<CreateGroupPage />} />
+          <Route path='groups/' element={<GroupsPage />} />
         </Routes>
       </main>
     </div>
