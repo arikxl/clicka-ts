@@ -11,18 +11,22 @@ export  interface Post {
     img_url: string;
     created_at: string;
     user_avatar_url?: string;
-    like_count: number;
-    comment_count:number
+    like_count?: number;
+    comment_count?:number
 }
 
 const fetchPosts = async (): Promise<Post[]> => {
 
-    const { data, error } = await supabase.from("posts").select("*").order("created_at", { ascending: false }).limit(4)
+    // const { data, error } = await supabase.from("posts").select("*").order("created_at", { ascending: false }).limit(4)
+    const { data, error } = await supabase.rpc('get_posts_with_counts_fun')
 
     if (error) throw new Error(error.message);
 
     return data as Post[];
 }
+
+
+
 
 
 const PostList = () => {
