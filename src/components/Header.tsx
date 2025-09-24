@@ -1,9 +1,12 @@
 import { Link } from 'react-router'
 import { useState } from 'react'
+import Avatar from "boring-avatars";
+
 
 import Button from './btns/Button';
 import HamburgerBtn from './btns/HamburgerBtn';
 import { useAuth } from '../context/AuthContext';
+import { colors } from '../utils/utils';
 
 
 
@@ -15,7 +18,6 @@ const Header = () => {
     // console.log(user?.user_metadata)
 
     const name = user?.user_metadata?.name;
-    const picture = user?.user_metadata?.avatar_url;
 
     const handleLogOut = () => {
         if (window.confirm('Do you want to logOut?')) logOut();
@@ -50,16 +52,8 @@ const Header = () => {
                                         <p>
                                             {name}
                                         </p>
-
-                                        {picture[0]==='h' ? (
-                                            <img alt={name} src={picture}
-                                                className='rounded-full w-10 cursor-pointer'
-                                                onClick={handleLogOut}
-                                            />
-                                        ) : (
-                                            <div className="w-[35px] h-[35px] rounded-full bg-gradient-to-br from-purple-500 to-pink-500" />
-                                        )}
-                                 
+                                        <Avatar onClick={handleLogOut} className='cursor-pointer'
+                                             name={name} colors={colors} variant="beam" size={40} />
                                     </div>
                                 )
                                 : (

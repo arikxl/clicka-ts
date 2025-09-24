@@ -1,6 +1,6 @@
 import React, { useRef, useState, type ChangeEvent } from 'react'
+import { useNavigate } from 'react-router';
 import { useMutation, useQuery } from '@tanstack/react-query';
-// import { useNavigate } from 'react-router';
 
 
 import Button from './btns/Button'
@@ -14,6 +14,7 @@ interface PostInput {
     content: string;
     user_avatar_url: string | null;
     group_id?: number | null;
+    author: string | null;
 }
 
 const createPost = async (post: PostInput, imgFile: File) => {
@@ -37,7 +38,7 @@ const createPost = async (post: PostInput, imgFile: File) => {
 }
 
 const CreatePostForm = () => {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
 
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -50,6 +51,7 @@ const CreatePostForm = () => {
     const [groupId, setGroupId] = useState<number | null>(null);
 
     const { user } = useAuth();
+    // console.log(user?.user_metadata.name)
 
     const { data: groupData } = useQuery<Group[], Error>({ queryKey: ["groups"], queryFn: fetchGroups })
 
@@ -57,16 +59,18 @@ const CreatePostForm = () => {
     const { mutate, isPending, isError } = useMutation({
         mutationFn: (data: { post: PostInput, imgFile: File }) => {
             return createPost(data.post, data.imgFile)
-        }
+        },
+        onSuccess: () => {
+            // This code will run only after a successful mutation
+            console.log("Post created successfully! Navigating to homepage.");
+            navigate('/');
+        },
     })
 
     const handleSubmitForm = (e: React.FormEvent) => {
         e.preventDefault()
         if (!selectedFile) return
-        mutate({ post: { title, content, user_avatar_url: user?.user_metadata.avatar_url || null , group_id:groupId}, imgFile: selectedFile })
-
-        // navigate('/')
-
+        mutate({ post: { title, content, author:user?.user_metadata.name, user_avatar_url: user?.user_metadata.avatar_url || null , group_id:groupId}, imgFile: selectedFile })
     }
 
 
@@ -78,7 +82,6 @@ const CreatePostForm = () => {
 
 
     const handleUploadButtonClick = () => {
-        // בודקים שה-ref אכן קיים ומפעילים עליו קליק
         if (fileInputRef.current) {
             fileInputRef.current.click();
         }
@@ -126,7 +129,8 @@ const CreatePostForm = () => {
             <div>
                 <label htmlFor="">Select Group: </label>
                 <select name="" id="group"
-                onChange={handleGroupChange}
+                    onChange={handleGroupChange}
+                    className='bg-black'
                 >
                     <option value="">
                         -- Choose a Group --

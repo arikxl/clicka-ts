@@ -79,7 +79,7 @@ const CommentItem = ({ comment, postId }: Props) => {
             </div>
 
             {showReply && user && (
-                <form onSubmit={handleReplySubmit}>
+                <form onSubmit={handleReplySubmit} className='mb-8'>
                     <textarea rows={2}
                         value={replyText}
                         className="mb-2 w-full border border-white/50 bg-transparent p-2 rounded"

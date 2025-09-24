@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import Button from './btns/Button'
 import { useNavigate } from 'react-router'
-import {  useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 
 import { supabase } from '../supabase-client'
+import { useAuth } from '../context/AuthContext'
 
 interface GroupInput {
     name: string,
@@ -13,7 +14,7 @@ interface GroupInput {
 
 
 const buildGroup = async (group: GroupInput) => {
-    const { error, data } = await supabase.from('groups').insert( group );
+    const { error, data } = await supabase.from('groups').insert(group);
     if (error) throw new Error(error.message);
     return data;
 }
@@ -47,8 +48,12 @@ const CreateGroupForm = () => {
 
     // if (commentsListError) return <div>Error: {commentsListError.message}</div>;
 
+    const { user } = useAuth();
 
     return (
+
+
+
         <form onSubmit={handleSubmitForm} className='max-w-2xl mx-auto space-y-4'>
             <div className=''>
                 <input id='name' required type='text'
@@ -71,10 +76,18 @@ const CreateGroupForm = () => {
             </div>
 
 
-
-            <Button type="submit" >
-                {isPending ? 'Building...' : 'Build a Group'}
+            <Button type="submit" disabled={!user}>
+                {
+                    user
+                        ? ( isPending ? 'Building...': 'Build a Group' )
+                        : ('Login to build a group')
+                }
             </Button>
+                    
+              
+        
+
+
 
             {isError && <p className="text-red-500">Error Building a Group!! ({error.message}) </p>}
 

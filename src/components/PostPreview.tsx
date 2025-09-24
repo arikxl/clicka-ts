@@ -1,7 +1,8 @@
 import { Link } from 'react-router'
 
-import { getColor } from '../utils/utils'
+import { colors } from '../utils/utils'
 import type { Post } from './PostList'
+import Avatar from 'boring-avatars'
 
 
 interface Props {
@@ -20,16 +21,8 @@ const PostPreview = ({ post }: Props) => {
                     className="background-cover w-80 h-70 bg-[rgb(24,27,32)] border border-[rgb(84,90,106)] rounded-[20px] text-white flex flex-col justify-between overflow-hidden transition-colors duration-300 group-hover:bg-gray-800">
                     {/* Header: Avatar and Title */}
                     <div className="flex items-center space-x-2  p-2 ">
-                        {post.user_avatar_url ? (
-                            <img
-                                src={post?.user_avatar_url}
-                                alt="User Avatar"
-                                className="w-[35px] h-[35px] rounded-full object-cover"
-                            />
-                        ) : (
-                                <div className={`w-[35px] h-[35px] rounded-full`}
-                                    style={getColor()} />
-                        )}
+                        <Avatar  className='cursor-pointer'
+                            name={post.author} colors={colors} variant="beam" size={40} />
                         <div className="flex flex-col flex-1 ">
                             <div className="text-[20px] leading-[22px] font-semibold">
                                 {post.title}
@@ -37,14 +30,6 @@ const PostPreview = ({ post }: Props) => {
                         </div>
                     </div>
 
-
-                    {/* <div className="mt-2 flex-1">
-                        <img
-                            src={post.img_url}
-                            alt={post.title}
-                            className="max-w-full w-fit rounded-[20px] object-cover  max-h-[150px] mx-auto"
-                        />
-                    </div> */}
 
                     <div className="flex justify-around items-center bg-black/50 w-full">
                         <span className="text-xl h-10 w-[50px] px-1 flex items-center justify-center font-extrabold rounded-lg">

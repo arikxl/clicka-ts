@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 
 
@@ -6,7 +7,6 @@ import LikeBtn from "./btns/LikeBtn";
 import CommentSection from "./CommentSection";
 import { supabase } from "../supabase-client";
 import type { Post } from "./PostList";
-import { Link } from "react-router";
 
 
 interface Props {
@@ -49,10 +49,9 @@ const PostDetails = ({ postId }: Props) => {
   });
 
   // console.log(groupData)
-  // console.log(data)
+  console.log(data)
 
 
-  // if (isLoading ) return <div>Loading Posts...</div>
   if (isLoading || isGroupLoading) return <div>Loading Posts...</div>
 
   if (error) return <div>Error: {error.message}</div>;
@@ -70,9 +69,9 @@ const PostDetails = ({ postId }: Props) => {
 
       <div className="flex-1 order-2 md:order-1">
 
-        <p className="text-gray-400 mb-10">
+        <h3 className="text-gray-200 text-xl mb-10">
           {data?.content}
-        </p>
+        </h3>
 
         <LikeBtn postId={postId} />
         <CommentSection postId={postId} />
@@ -81,6 +80,7 @@ const PostDetails = ({ postId }: Props) => {
       <div className="flex-1 md:order-2">
         <p className="text-gray-500 text-sm mt-10">
           Posted on: {new Date(data!.created_at).toLocaleDateString()}
+            &nbsp;by <span className="text-white font-bold">{data?.author}</span>
 
           {
             groupData?.name && (
@@ -88,7 +88,8 @@ const PostDetails = ({ postId }: Props) => {
                 &nbsp;in <Link to={`/group/${groupId}`} className="text-white underline">{groupData?.name}</Link> group
               </>
             )
-          }
+            }
+            .
         </p>
         <img src={data?.img_url} alt={data?.title} className=" mt-4 rounded object-cover w-full" />
       </div>

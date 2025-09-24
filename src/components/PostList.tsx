@@ -13,13 +13,14 @@ export  interface Post {
     user_avatar_url?: string;
     like_count?: number;
     comment_count?: number;
-    group_id?: number  
+    group_id?: number;
+    author: string;
 }
 
 const fetchPosts = async (): Promise<Post[]> => {
 
     // const { data, error } = await supabase.from("posts").select("*").order("created_at", { ascending: false }).limit(4)
-    const { data, error } = await supabase.rpc('get_posts_with_counts_fun')
+    const { data, error } = await supabase.rpc('get_posts_with_counts_fun1')
 
     if (error) throw new Error(error.message);
 
@@ -42,7 +43,6 @@ const PostList = () => {
     if (error) return <div>Error: {error.message}</div>;
     
 
-    // console.log(data)
     return (
         <div className='flex flex-wrap gap-6 justify-center'>
             {
