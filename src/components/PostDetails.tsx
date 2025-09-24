@@ -13,7 +13,7 @@ interface Props {
   postId: number
 }
 
-const fetchPostById = async (postId: number): Promise<Post> => {
+const fetchPostById = async (postId: number ): Promise<Post> => {
 
   const { data, error } = await supabase.from("posts").select("*").eq("id", postId).single();
 
@@ -44,7 +44,8 @@ const PostDetails = ({ postId }: Props) => {
 
   const { data: groupData, isLoading: isGroupLoading } = useQuery({
     queryKey: ["group", groupId],
-    enabled: !!groupId && groupId !== 'null',
+    // enabled: !!groupId && groupId !== 'null',
+    enabled: groupId != null,
     queryFn: () => fetchGroupDetails(groupId!)
   });
 
