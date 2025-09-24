@@ -12,7 +12,8 @@ export  interface Post {
     created_at: string;
     user_avatar_url?: string;
     like_count?: number;
-    comment_count?:number
+    comment_count?: number;
+    group_id?: number  
 }
 
 const fetchPosts = async (): Promise<Post[]> => {
@@ -41,7 +42,7 @@ const PostList = () => {
     if (error) return <div>Error: {error.message}</div>;
     
 
-    console.log(data)
+    // console.log(data)
     return (
         <div className='flex flex-wrap gap-6 justify-center'>
             {

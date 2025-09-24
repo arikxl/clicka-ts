@@ -1,12 +1,13 @@
+import type { ReactNode } from "react"
 
 type Props = {
-    children: string | undefined
+    children: ReactNode
 }
 
-const Title = (props: Props) => {
+const Title = ({ children }: Props) => {
     return (
         <h2 className='text-center bg-clip-text text-transparent mb-6 text-6xl font-bold bg-gradient-to-r from-purple-500 to-[hotpink]'>
-            {props.children}
+            {children}
         </h2>
 
     )
