@@ -1,10 +1,8 @@
-import React from 'react'
 import CreatePostForm from '../components/CreatePostForm'
 import Title from '../components/Title'
 
-type Props = {}
 
-const CreatePostPage = (props: Props) => {
+const CreatePostPage = () => {
   return (
     <div className='pt-10'>
       <Title>

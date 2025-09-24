@@ -1,10 +1,8 @@
-import React from 'react'
 import PostDetails from '../components/PostDetails'
 import { useParams } from 'react-router';
 
-type Props = {}
 
-const PostPage = (props: Props) => {
+const PostPage = () => {
 
     const { id } = useParams<{ id: string }>(); 
 
